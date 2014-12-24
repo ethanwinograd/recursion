@@ -1,22 +1,63 @@
 (ns recursion)
 
 (defn product [coll]
-  :-)
+  (if (empty? coll)
+    1
+    (* (first coll) (product(rest coll))
+  )))
+
+(product [])        ;=> 1  ; special case
+(product [1 2 3])   ;=> 6
+(product [1 2 3 4]) ;=> 24
+(product [0 1 2])   ;=> 0
+(product #{2 3 4})
+
 
 (defn singleton? [coll]
-  :-)
+  (and (= false (empty? coll)) (empty? (rest coll))))
+
+(singleton? [1])     ;=> true
+(singleton? #{2})    ;=> true
+(singleton? [])      ;=> false
+(singleton? [1 2 3]) ;=> false
 
 (defn my-last [coll]
-  :-)
+  (if (empty? (rest coll))
+    (first coll)
+    (my-last (rest coll))))
+
+(my-last [])      ;=> nil
+(my-last [1 2 3]) ;=> 3
+(my-last [2 5])   ;=> 5
 
 (defn max-element [a-seq]
-  :-)
+  (if (empty? a-seq)
+    nil
+   (if (singleton? a-seq)
+    (first a-seq)
+    (max (first a-seq) (max-element (rest a-seq))))))
+
+(max-element [2 4 1 4]) ;=> 4
+(max-element [2])       ;=> 2
+(max-element [])        ;=> nil
 
 (defn seq-max [seq-1 seq-2]
-  [:-])
+  (if (> (count seq-1) (count seq-2))
+    seq-1
+    seq-2))
+
+(seq-max [ 1 3 ] [ 1 3 ])
 
 (defn longest-sequence [a-seq]
-  [:-])
+  (if (empty? a-seq)
+    nil
+    (if (singleton? a-seq)
+      (first a-seq)
+      (seq-max (first a-seq) (longest-sequence (rest a-seq))))))
+
+(longest-sequence [[1 2] [] [1 2 3]]) ;=> [1 2 3]
+(longest-sequence [[1 2]])            ;=> [1 2]
+(longest-sequence [])                 ;=> nil
 
 (defn my-filter [pred? a-seq]
   [:-])
