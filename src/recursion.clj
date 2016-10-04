@@ -3,8 +3,8 @@
 (defn product [coll]
   (if (empty? coll)
     1
-    (* (first coll) (product (rest coll))
-       )))
+    (* (first coll) (product (rest coll)))))
+
 
 (product [])                                                ;=> 1  ; special case
 (product [1 2 3])                                           ;=> 6
@@ -63,7 +63,7 @@
 (defn my-filter [pred? a-seq]
   (if (empty? a-seq)
     a-seq
-    (if (pred? (first a-seq) )
+    (if (pred? (first a-seq))
       (cons (first a-seq) (my-filter pred? (rest a-seq)))
       (my-filter pred? (rest a-seq)))))
 
@@ -73,16 +73,19 @@
 (my-filter even? [1 3 5 7])                                 ;=> ()
 
 (defn sequence-contains? [elem a-seq]
-  (cond
-    (empty? a-seq)
+    (if (empty? a-seq)
       false
-    (= elem (first a-seq))
-      true
-    :else
-      (sequence-contains? elem (rest a-seq))))
+      (if (= elem (first a-seq))
+          true
+          (sequence-contains? elem (rest a-seq)))))
+
+
 
 (defn my-take-while [pred? a-seq]
-  [:-])
+  (if (empty? a-seq) ()
+    (if (pred? (first a-seq))
+       (cons (first a-seq) (my-take-while pred? (rest a-seq)))
+       ())))
 
 (defn my-drop-while [pred? a-seq]
   [:-])
