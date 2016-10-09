@@ -88,10 +88,19 @@
        ())))
 
 (defn my-drop-while [pred? a-seq]
-  [:-])
+  (if (empty? a-seq) ()
+    (if (pred? (first a-seq))
+      (my-drop-while pred? (rest a-seq))
+      a-seq)))
+
 
 (defn seq= [a-seq b-seq]
-  :-)
+  (if (and (empty? a-seq) (empty? b-seq))
+    true
+    (if (and (= (count a-seq) (count b-seq))(= (first a-seq) (first b-seq)))
+        (seq= (rest a-seq) (rest b-seq))
+        false)))
+
 
 (defn my-map [f seq-1 seq-2]
   [:-])
